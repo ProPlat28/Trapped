@@ -17,6 +17,10 @@ class $modify(MenuLayer) {
         showPopup();
     }
 
+    void onEditor(CCObject* target) {
+        showPopup();
+    }    
+
     void onGarage(CCObject* target) {
         showPopup();
     }
