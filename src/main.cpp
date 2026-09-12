@@ -10,8 +10,7 @@ class $modify(MenuLayer) {
 		"You're trapped here FOREVER!!",
 		"OK"
 	   )->show();
-	}	
-}
+}	
 
 	void onIconKit(CCObject* target) {
 	   FLAlertLayer::create(
@@ -44,4 +43,3 @@ class $modify(MenuLayer) {
 	   )->show();
 	}	
 };
-
