@@ -42,6 +42,6 @@ class $modify(MenuLayer) {
 		"You're trapped here FOREVER!!",
 		"OK"
 	   )->show();
-
+	}	
 };
 
