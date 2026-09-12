@@ -6,8 +6,8 @@ using namespace geode::prelude;
 class $modify(MenuLayer) {
 	void onPlay(CCObject* target) {
 	   FLAlertLayer create(
-		"HAHA"
-		"You're trapped here FOREVER!!"
+		"HAHA",
+		"You're trapped here FOREVER!!",
 		"OK"
 	   )->show();
 	}	
@@ -15,31 +15,31 @@ class $modify(MenuLayer) {
 
 	void onIconKit(CCObject* target) {
 	   FLAlertLayer create(
-		"HAHA"
-		"You're trapped here FOREVER!!"
+		"HAHA",
+		"You're trapped here FOREVER!!",
 		"OK"
 	   )->show();
 }
 
 	void onMoreGames(CCObject* target) {
 	   FLAlertLayer create(
-		"HAHA"
-		"You're trapped here FOREVER!!"
+		"HAHA",
+		"You're trapped here FOREVER!!",
 		"OK"
 	   )->show();
 	
 }
 	void onEditor(CCObject* target) {
 	   FLAlertLayer create(
-		"HAHA"
-		"You're trapped here FOREVER!!"
+		"HAHA",
+		"You're trapped here FOREVER!!",
 		"OK"
 	   )->show();
 }
 	void onProfile(CCObject* target) {
 	   FLAlertLayer create(
-		"HAHA"
-		"You're trapped here FOREVER!!"
+		"HAHA",
+		"You're trapped here FOREVER!!",
 		"OK"
 	   )->show();
 
