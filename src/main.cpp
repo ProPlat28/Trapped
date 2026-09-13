@@ -1,32 +1,24 @@
 #include <Geode/Geode.hpp>
-#include <Geode/modify/MenuLayer.hpp>
+#include <Geode/modify/CCMenu.hpp>
 
 using namespace geode::prelude;
 
-static void hideTrappedButtons(CCNode* node) {
-    if (!node)
-        return;
+class $modify(CCMenu) {
 
-    std::string id = std::string(node->getID());
+    void addChild(CCNode* child) {
+        CCMenu::addChild(child);
 
-    if (id == "dankmeme.globed2/main-menu-button" ||
-        id == "geode.loader/geode-button") {
-        node->setVisible(false);
-    }
+        if (!child)
+            return;
 
-    if (node->getChildren()) {
-        for (auto child : CCArrayExt<CCNode*>(node->getChildren())) {
-            hideTrappedButtons(child);
+        std::string id = std::string(child->getID());
+
+        if (id == "dankmeme.globed2/main-menu-button" ||
+            id == "geode.loader/geode-button") {
+            child->setVisible(false);
         }
     }
-}
-
-class $modify(MenuLayer) {
-
-    void visit() {
-        hideTrappedButtons(this);
-        MenuLayer::visit();
-    }
+};
 
     void showPopup() {
         FLAlertLayer::create(
