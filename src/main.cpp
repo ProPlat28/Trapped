@@ -85,12 +85,11 @@ static void hideButtons(cocos2d::CCNode* node) {
     if (!node)
         return;
 
-    if (auto button = node->getChildByID("dankmeme.globed2/mein-menu-button")) {
-        button->setVisible(false);
-    }
+    auto id = std::string(node->getID());
 
-    if (auto button = node->getChildByID("geode.loader/geode-button")) {
-        button->setVisible(false);
+    if (id == "dankmeme.globed2/mein-menu-button" ||
+        id == "geode.loader/geode-button") {
+        node->setVisible(false);
     }
 
     for (auto child : CCArrayExt<cocos2d::CCNode*>(node->getChildren())) {
@@ -98,18 +97,13 @@ static void hideButtons(cocos2d::CCNode* node) {
     }
 }
 
-bool init() {
-    if (!MenuLayer::init())
-        return false;
+class $modify(MenuLayer) {
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-    hideButtons(this);
+        hideButtons(this);
 
-    this->scheduleOnce([](float) {
-        if (auto scene = cocos2d::CCDirector::sharedDirector()->getRunningScene()) {
-            hideButtons(scene);
-        }
-    }, 0.0f);
-
-    return true;
-   }
+        return true;
+    }
 };
