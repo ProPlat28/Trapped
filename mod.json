@@ -15,7 +15,6 @@
 		"geode.node-ids": ">=v1.23.3"
 	},
 	"incompatibilities": {
-    "dankmeme.globed2": "*",
 	"waolth.moregames": "*"	
     }
 }
