@@ -41,6 +41,10 @@ class $modify(MenuLayer) {
         showPopup();
     }
 
+    void onAchievements(CCObject* target) {
+        showPopup();
+    }
+
     void onMoreGames(CCObject* target) {
         showPopup();
     }
@@ -77,19 +81,19 @@ class $modify(MenuLayer) {
         showPopup();
     }
 
-    void hideButtons(CCNode* node) {
+static void hideButtons(cocos2d::CCNode* node) {
     if (!node)
-           return;
+        return;
 
-    auto id = std::string(node->getID());
-
-    if (id.find("geode") != std::string::npos ||
-        id == "dankmeme.globed2") {
-        node->setVisible(false);
-        node->setEnabled(false);
+    if (auto button = node->getChildByID("dankmeme.globed2/mein-menu-button")) {
+        button->setVisible(false);
     }
 
-    for (auto child : CCArrayExt<CCNode*>(node->getChildren())) {
+    if (auto button = node->getChildByID("geode.loader/geode-button")) {
+        button->setVisible(false);
+    }
+
+    for (auto child : CCArrayExt<cocos2d::CCNode*>(node->getChildren())) {
         hideButtons(child);
     }
 }
@@ -100,13 +104,11 @@ bool init() {
 
     hideButtons(this);
 
-    this->scheduleOnce([this](float) {
-        hideButtons(this);
-    }, 0.0f, "hide-geode-globed");
+    this->scheduleOnce([](float) {
+        if (auto scene = cocos2d::CCDirector::sharedDirector()->getRunningScene()) {
+            hideButtons(scene);
+        }
+    }, 0.0f, "hide-buttons");
 
     return true;
 }
-
-And your class must end with:
-
-};
