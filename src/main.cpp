@@ -1,22 +1,41 @@
 #include <Geode/Geode.hpp>
-#include <Geode/modify/CCMenu.hpp>
+#include <Geode/modify/MenuLayer.hpp>
 
 using namespace geode::prelude;
 
-class $modify(CCMenu) {
+class $modify(TrappedMenuLayer, MenuLayer) {
 
-    void addChild(CCNode* child) {
-        CCMenu::addChild(child);
+    void hideButtons(float) {
+        auto bottomMenu = this->getChildByID("bottom-menu");
 
-        if (!child)
+        if (!bottomMenu)
             return;
 
-        std::string id = std::string(child->getID());
+        auto globed = bottomMenu->getChildByID(
+            "dankmeme.globed2/main-menu-button"
+        );
 
-        if (id == "dankmeme.globed2/main-menu-button" ||
-            id == "geode.loader/geode-button") {
-            child->setVisible(false);
-        }
+        if (globed)
+            globed->setVisible(false);
+
+        auto geode = bottomMenu->getChildByID(
+            "geode.loader/geode-button"
+        );
+
+        if (geode)
+            geode->setVisible(false);
+    }
+
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
+
+        this->schedule(
+            schedule_selector(TrappedMenuLayer::hideButtons),
+            0.0f
+        );
+
+        return true;
     }
 };
 
