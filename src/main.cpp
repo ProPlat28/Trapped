@@ -24,20 +24,21 @@ class $modify(TrappedMenuLayer, MenuLayer) {
 
         if (geode)
             geode->setVisible(false);
+
+        this->scheduleOnce(
+            schedule_selector(TrappedMenuLayer::hideButtons),
+            0.0f
+        );
     }
 
     bool init() {
         if (!MenuLayer::init())
             return false;
 
-        this->schedule(
-            schedule_selector(TrappedMenuLayer::hideButtons),
-            0.0f
-        );
+        hideButtons(0.0f);
 
         return true;
     }
-};
 
     void showPopup() {
         FLAlertLayer::create(
@@ -63,7 +64,6 @@ class $modify(TrappedMenuLayer, MenuLayer) {
         showPopup();
     }
 
-
     void onGarage(CCObject* target) {
         showPopup();
     }
@@ -87,11 +87,11 @@ class $modify(TrappedMenuLayer, MenuLayer) {
     void onFacebook(CCObject* target) {
         showPopup();
     }
-    
+
     void onTwitter(CCObject* target) {
         showPopup();
     }
-    
+
     void onDiscord(CCObject* target) {
         showPopup();
     }
@@ -99,7 +99,7 @@ class $modify(TrappedMenuLayer, MenuLayer) {
     void onTwitch(CCObject* target) {
         showPopup();
     }
-    
+
     void onYouTube(CCObject* target) {
         showPopup();
     }
