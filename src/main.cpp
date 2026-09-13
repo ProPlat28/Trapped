@@ -9,7 +9,7 @@ static void hideTrappedButtons(CCNode* node) {
 
     std::string id = std::string(node->getID());
 
-    if (id == "dankmeme.globed2/mein-menu-button" ||
+    if (id == "dankmeme.globed2/main-menu-button" ||
         id == "geode.loader/geode-button") {
         node->setVisible(false);
     }
@@ -23,19 +23,19 @@ static void hideTrappedButtons(CCNode* node) {
 
 class $modify(MenuLayer) {
 
-    void hideButtonsLater(float) {
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
+
         hideTrappedButtons(this);
+
+        return true;
     }
 
     void onEnter() {
         MenuLayer::onEnter();
 
         hideTrappedButtons(this);
-
-        this->scheduleOnce(
-            schedule_selector(MenuLayer::hideButtonsLater),
-            0.1f
-        );
     }
 
     void showPopup() {
