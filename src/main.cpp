@@ -108,7 +108,8 @@ bool init() {
         if (auto scene = cocos2d::CCDirector::sharedDirector()->getRunningScene()) {
             hideButtons(scene);
         }
-    }, 0.0f, "hide-buttons");
+    }, 0.0f);
 
     return true;
-}
+   }
+};
