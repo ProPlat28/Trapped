@@ -23,19 +23,9 @@ static void hideTrappedButtons(CCNode* node) {
 
 class $modify(MenuLayer) {
 
-    bool init() {
-        if (!MenuLayer::init())
-            return false;
-
+    void visit() {
         hideTrappedButtons(this);
-
-        return true;
-    }
-
-    void onEnter() {
-        MenuLayer::onEnter();
-
-        hideTrappedButtons(this);
+        MenuLayer::visit();
     }
 
     void showPopup() {
