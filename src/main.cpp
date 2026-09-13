@@ -62,9 +62,6 @@ class $modify(MenuLayer) {
         showPopup();
     }
 
-    void onRobTop(CCObject* target) {
-        showPopup();
-    }
 
     void onGarage(CCObject* target) {
         showPopup();
