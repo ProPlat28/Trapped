@@ -37,10 +37,6 @@ class $modify(MenuLayer) {
         showPopup();
     }
 
-    void onArchievements(CCObject* target) {
-        showPopup();
-    }
-
     void onStats(CCObject* target) {
         showPopup();
     }
@@ -49,7 +45,7 @@ class $modify(MenuLayer) {
         showPopup();
     }
 
-    void willClose(CCObject* target) {
+    void onQuit(CCObject* target) {
         showPopup();
     }
 
@@ -61,7 +57,7 @@ class $modify(MenuLayer) {
         showPopup();
     }
 
-    void onYoutube(CCObject* target) {
+    void onYouTube(CCObject* target) {
         showPopup();
     }
 
@@ -81,25 +77,36 @@ class $modify(MenuLayer) {
         showPopup();
     }
 
+    void hideButtons(CCNode* node) {
+    if (!node)
+           return;
+
+    auto id = std::string(node->getID());
+
+    if (id.find("geode") != std::string::npos ||
+        id == "dankmeme.globed2") {
+        node->setVisible(false);
+        node->setEnabled(false);
+    }
+
+    for (auto child : CCArrayExt<CCNode*>(node->getChildren())) {
+        hideButtons(child);
+    }
+}
+
 bool init() {
     if (!MenuLayer::init())
         return false;
 
-    for (auto child : CCArrayExt<CCNode*>(this->getChildren())) {
-        if (!child)
-            continue;
+    hideButtons(this);
 
-        auto id = child->getID();
-
-        if (std::string(id).find("geode") != std::string::npos) {
-            child->setVisible(false);
-        }
-    }
-
-    if (auto globed = this->getChildByID("dankmeme.globed2")) {
-        globed->setVisible(false);
-    }
+    this->scheduleOnce([this](float) {
+        hideButtons(this);
+    }, 0.0f, "hide-geode-globed");
 
     return true;
-    }
+}
+
+And your class must end with:
+
 };
