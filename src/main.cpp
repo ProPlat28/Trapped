@@ -3,23 +3,40 @@
 
 using namespace geode::prelude;
 
-static void hideButtons(CCNode* node) {
+static void hideTrappedButtons(CCNode* node) {
     if (!node)
         return;
 
-    auto id = std::string(node->getID());
+    std::string id = std::string(node->getID());
 
-    if (id == "dankmeme.globed2/main-menu-button" ||
+    if (id == "dankmeme.globed2/mein-menu-button" ||
         id == "geode.loader/geode-button") {
         node->setVisible(false);
     }
 
-    for (auto child : CCArrayExt<CCNode*>(node->getChildren())) {
-        hideButtons(child);
+    if (node->getChildren()) {
+        for (auto child : CCArrayExt<CCNode*>(node->getChildren())) {
+            hideTrappedButtons(child);
+        }
     }
 }
 
 class $modify(MenuLayer) {
+
+    void hideButtonsLater(float) {
+        hideTrappedButtons(this);
+    }
+
+    void onEnter() {
+        MenuLayer::onEnter();
+
+        hideTrappedButtons(this);
+
+        this->scheduleOnce(
+            schedule_selector(MenuLayer::hideButtonsLater),
+            0.1f
+        );
+    }
 
     void showPopup() {
         FLAlertLayer::create(
@@ -33,7 +50,7 @@ class $modify(MenuLayer) {
         showPopup();
     }
 
-    void onArchievements(CCObject* target) {
+    void onAchievements(CCObject* target) {
         showPopup();
     }
 
@@ -69,20 +86,35 @@ class $modify(MenuLayer) {
         showPopup();
     }
 
-    void willClose(CCObject* target) {
+    void onFacebook(CCObject* target) {
+        showPopup();
+    }
+    
+    void onTwitter(CCObject* target) {
+        showPopup();
+    }
+    
+    void onDiscord(CCObject* target) {
+        showPopup();
+    }
+
+    void onTwitch(CCObject* target) {
+        showPopup();
+    }
+    
+    void onYouTube(CCObject* target) {
+        showPopup();
+    }
+
+    void onRobTop(CCObject* target) {
+        showPopup();
+    }
+
+    void onQuit(CCObject* target) {
         showPopup();
     }
 
     void onMyProfile(CCObject* target) {
         showPopup();
-    }
-
-    bool init() {
-        if (!MenuLayer::init())
-            return false;
-
-        hideButtons(this);
-
-        return true;
     }
 };
