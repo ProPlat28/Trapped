@@ -82,24 +82,24 @@ class $modify(MenuLayer) {
         showPopup();
     }
 
-    bool init() {
-        if (!MenuLayer::init())
-            return false;
+bool init() {
+    if (!MenuLayer::init())
+        return false;
 
-        for (auto child : CCArrayExt<CCNode*>(this->getChildren())) {
-            if (!child)
-                continue;
+    for (auto child : CCArrayExt<CCNode*>(this->getChildren())) {
+        if (!child)
+            continue;
 
-            auto id = child->getID();
-            if (id && std::string(id).find("geode") != std::string::npos) {
-                child->setVisible(false);
-            }
+        auto id = child->getID();
+
+        if (std::string(id).find("geode") != std::string::npos) {
+            child->setVisible(false);
         }
-
-        if (auto globed = this->getChildByID("dankmeme.globed2")) {
-            globed->setVisible(false);
-        }
-
-        return true;
     }
-};
+
+    if (auto globed = this->getChildByID("dankmeme.globed2")) {
+        globed->setVisible(false);
+    }
+
+    return true;
+}
